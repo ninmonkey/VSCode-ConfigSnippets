@@ -1,0 +1,32 @@
+{
+    /*
+
+    Description:
+        - save and paste automatically formats json/jsonc
+        - treats all .json as .jsonc
+            Otherwise lots of warnings for `.json` have false-positives
+
+    */
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.detectIndentation": false,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.semanticHighlighting.enabled": true,
+        "editor.tabSize": 4,
+        // "editor.maxTokenizationLineLength": 20000 # if you need more
+    },
+    "files.associations": {
+        "*.json": "jsonc",
+    },
+    "[jsonc]": {
+        // or: "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.detectIndentation": false,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.semanticHighlighting.enabled": true,
+        "editor.tabSize": 4,
+        // "editor.maxTokenizationLineLength": 20000 # if you need more
+    },
+}

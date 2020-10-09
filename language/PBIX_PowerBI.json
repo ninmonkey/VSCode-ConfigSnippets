@@ -1,0 +1,56 @@
+{
+    /*
+
+    Description:
+        - Automatically opens some pbix files with the right syntax highlighting
+        - treats all .json as .jsonc
+            Otherwise lots of warnings for `.json` have false-positives
+
+    */
+    "files.defaultLanguage": "${activeEditorLanguage}",
+    "files.associations": {
+        /* specific files in a PBIX */
+        // "DataModel": "", # compressed data model
+        // "SecurityModel": "", # bytes
+        "**/Layout/**": "json",
+        "DataMashup": "xml",
+        "DiagramLayout": "json",
+        "Layout": "json",
+        "Metadata": "json",
+        "Settings": "json",
+    },
+    "files.exclude": {
+        // Hide *pbix [1] in sidebar also [2] filters for 'quick open'
+        // if true [3] search in files will skip
+        "*.pbix": true,
+        "*.log": true,
+    },
+    "search.exclude": {
+        // files must also not be filtered by 'files.exclude'
+        // "!*.pbix": true,
+        "*.log": true,
+        "*.pbix": true,
+    },
+    "[powerquery]": {
+        // ### auto-Formatting ###
+        "editor.formatOnPaste": true,
+        "editor.formatOnType": true,
+        "editor.formatOnSave": false,
+        /* wrap: either auto or max-width */
+        "editor.wordWrap": "on",
+        /* wrap: using min(window, max-width) */
+        // "editor.wordWrap": "bounded",
+        // "editor.wordWrapColumn": 120,
+        "editor.defaultFormatter": "PowerQuery.vscode-powerquery",
+        "editor.snippetSuggestions": "bottom",
+        // "editor.codeActionsOnSave": {"source.fixAll": true}
+        "editor.colorDecorators": true,
+        "editor.trimAutoWhitespace": true,
+        /* ### Suggestions ### */
+        // "editor.quickSuggestions": {
+        //     "other": true,
+        //     "comments": false,
+        //     "strings": false
+        // }
+    },
+}
