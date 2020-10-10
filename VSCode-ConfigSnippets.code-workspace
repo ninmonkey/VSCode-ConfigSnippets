@@ -1,8 +1,20 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
+    "folders": [
+        {
+            "path": ".."
+        }
     ],
-    "settings": {}
+    "settings": {},
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Collect vscode settings.ps1",
+                "type": "PowerShell",
+                "request": "launch",
+                "script": "${workspaceFolder}/VSCode-ConfigSnippets/util/collect vscode settings.ps1",
+                "cwd": "${workspaceFolder}/VSCode-ConfigSnippets"
+            }
+        ]
+    }
 }

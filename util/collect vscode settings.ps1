@@ -5,6 +5,12 @@ $Config = @{
     Dest         = Join-Path -Path '.' -ChildPath '.\exported\filtered_settings.json'
     DestBasePath = '.\exported'
 }
+
+Write-Warning 'todo:
+    - [ ] try the new json parser lib, that might support comments?
+    - [ ] selecting language [python] automatatically includes all child nodes
+    - [ ] also currently missing: multi-line comments
+'
 # $src = Get-Item 'C:\Users\cppmo_000\AppData\Roaming\Code\User\settings.json'
 # $dest = 'C:\Users\cppmo_000\Documents\2020\MyModules_Github\VSCode-ConfigSnippets\terminal\wip_terminal_settings.json'
 
@@ -120,6 +126,26 @@ function Get-VSCodeConfig {
 }
 
 
+function _formatSummary {
+    <#
+    .synopsis
+        make summary a little more readable
+    #>
+    param(
+        [parameter(Mandatory, ValueFromPipeline)]
+        $InputObject
+    )
+
+    process {
+        $meta = [ordered]@{
+            Lines = $InputObject.LineCount
+            Regex = $InputObject.Regex
+            Name  = $InputObject.Destination | Get-Item | Select-Object -exp Name
+        }
+        [pscustomobject]$meta
+    }
+}
+
 function Main_VSCollect {
     $summary = @()
     $splat = @{
@@ -137,14 +163,54 @@ function Main_VSCollect {
     }
     Get-VSCodeConfig @splat
 
+    $splat = @{
+        Regex       = 'python', 'pylance', 'ipython', 'black', 'pip', 'mypy'
+        # Source = 'foo' # default is user's profile
+        Destination = Join-Path -Path $Config.DestBasePath -ChildPath 'python_verbose.json'
+    }
+    Get-VSCodeConfig @splat
+
+    $splat = @{
+        Regex       = 'python', 'ipython'
+        # Source = 'foo' # default is user's profile
+        Destination = Join-Path -Path $Config.DestBasePath -ChildPath 'python.json'
+    }
+    Get-VSCodeConfig @splat
+
+    $splat = @{
+        Regex       = 'languageserver'
+        # Source = 'foo' # default is user's profile
+        Destination = Join-Path -Path $Config.DestBasePath -ChildPath 'language_server.json'
+    }
+    Get-VSCodeConfig @splat
+    $splat = @{
+        Regex       = 'format'
+        # Source = 'foo' # default is user's profile
+        Destination = Join-Path -Path $Config.DestBasePath -ChildPath 'format.json'
+    }
+    Get-VSCodeConfig @splat
+
+    $splat = @{
+        Regex       = 'include', 'exclude', 'ignore', 'files\.include', 'files\.exclude'
+        # Source = 'foo' # default is user's profile
+        Destination = Join-Path -Path $Config.DestBasePath -ChildPath 'include_exclude.json'
+    }
+    Get-VSCodeConfig @splat
+
+
 
 
     h1 'summary'
     $script:summary
+
+    $script:summary | _formatSummary
+    | Select-Object Name, Lines, Regex
+    | Sort-Object Name
+    | Format-Table -AutoSize -Wrap
 
 }
 
 
 #entry point
 Main_VSCollect
-| Format-List
+# | Format-List
