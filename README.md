@@ -5,3 +5,7 @@ These are small examples that are easily added to your User.js mini VS Code conf
 ## Location of Settings.json
 
 `%AppData%\Code\User\settings.json`
+
+## util: collect settings
+
+`util\collect vscode settings.ps1` generates the `exported\*.json` configs

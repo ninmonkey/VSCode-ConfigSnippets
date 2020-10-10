@@ -9,24 +9,17 @@
         - optionally run a new session on exectute, clearing junk in memory
 
     */
-    "debug": 1,
-    /* many settings must be in the workspace, so this is mainly overrides? */
-    "editor.snippetSuggestions": "none", //"bottom",
     "files.defaultLanguage": "${activeEditorLanguage}",
+    // enables a new session every run, meaning old functions and variables don't pullute the next run
     "powershell.debugging.createTemporaryIntegratedConsole": false,
     "files.associations": {
         // powershell specific
         "Types.ps1xml": "xml",
-        "ps1xml": "xml"
+        "*.ps1xml": "xml"
     },
     "editor.renderLineHighlight": "all",
-    /* A path that when set will override terminal.integrated.shell.windows and ignore shellArgs values for automation-related terminal usage like tasks and debug. */
-    // "terminal.integrated.automationShell.windows": "",
-    "editor.formatOnPaste": true,
-    "editor.formatOnType": true,
-    "editor.formatOnSave": true,
     "[powershell]": {
-        "editor.snippetSuggestions": "none", //"bottom",
+        "editor.snippetSuggestions": "none", // or: "bottom",
         "editor.wordWrap": "bounded",
         "editor.wordWrapColumn": 140,
         "editor.wrappingIndent": "deepIndent",
@@ -52,6 +45,9 @@
     "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
     /* extra logging for vscode-powershell addon */
     // "powershell editor services.trace.server": "verbose",
+    /* A path that when set will override terminal.integrated.shell.windows and ignore shellArgs values for automation-related terminal usage like tasks and debug.
+    */
+    // "terminal.integrated.automationShell.windows": "",
     "terminal.integrated.shellArgs.windows": [
         // toggle to disable loading profile
         // "-nop", "-nol"
